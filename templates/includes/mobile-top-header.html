@@ -1,0 +1,61 @@
+<ul>
+    <!-- search bar -->
+    <li class="list-inline-item">
+      <a class="text-black nav-link d-block d-lg-none" href="#" id="mobile-search" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <div class="text-center">
+              <div><h5 class="bi bi-search"></h5></div>
+              <p class="my-0">search</p>
+          </div>
+      </a>
+      <div class="dropdown-menu border-0 w-100 p-3 rounded-0 my-0" aria-labelledby="mobile-search">
+          <form class="form" method="GET" action="#">
+              <div class="input-group w-100">
+                  <input class="form-control border border-black rounded-0" type="text" name="q" placeholder="search our products...">
+                  <div class="input-group-append">
+                      <button class="form-control form-control btn btn-black border border-black rounded-0" type="submit">
+                          <span class="icon">
+                              <i class="bi bi-search"></i>
+                          </span>
+                      </button>
+                  </div>
+              </div>
+          </form>
+      </div>
+  </li>
+    <!-- my account dropdown menu -->
+  <li class="list-inline-item dropdown">
+      <a class="text-black nav-link d-block d-lg-none" href="#" id="user-options" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <div class="text-center">
+              <div><h5 class="bi bi-person-fill"></h5></div>
+              <p class="my-0">my account</p>
+          </div>
+      </a>
+      <div class="dropdown-menu border-0" aria-labelledby="user-options">
+          {% if request.user.is_authenticated %}
+              {% if request.user.is_superuser %}
+                  <a href="#" class="dropdown-item">admin</a>
+              {% endif %}
+              <a href="#" class="dropdown-item">my profile</a>
+              <a href="{% url 'account_logout' %}" class="dropdown-item">logout</a>
+          {% else %}
+              <a href="{% url 'account_signup' %}" class="dropdown-item">register</a>
+              <a href="{% url 'account_login' %}" class="dropdown-item">login</a>
+          {% endif %}
+      </div>
+  </li>
+     <!-- shopping bag -->
+  <li class="list-inline-item">
+      <a class="{% if grand_total %}text-danger font-weight-bold{% else %}text-black{% endif %} nav-link d-block d-lg-none" href="#">
+          <div class="text-center">
+              <div><h5 class="bi bi-basket2-fill"></h5></div>
+              <p class="my-0">
+                  {% if grand_total %}
+                      €{{ total|floatformat:2 }}
+                  {% else %}
+                      €0.00
+                  {% endif %}
+              </p>
+          </div>
+      </a>
+    </li>
+  </ul>
