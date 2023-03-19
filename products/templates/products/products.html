@@ -28,16 +28,16 @@
                     <div class="col-sm-6 col-lg-4 col-xl-3">
                         <div class="card h-100 border-0">
                             {% if product.image %}
-                                <a href="">
-                                    <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
+                                <a href="{% url 'product_detail' product.id %}">
+                                    <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.name | lower }}">
                                 </a>
                             {% else %}
-                                <a href="">
-                                    <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.jpg" alt="{{ product.name }}">
+                                <a href="{% url 'product_detail' product.id %}">
+                                    <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.jpg" alt="{{ product.name | lower }}">
                                 </a>
                             {% endif %}
                             <div class="card-body pb-0">
-                                <p class="mb-0">{{ product.name }}</p>
+                                <p class="mb-0">{{ product.name | lower}}</p>
                             </div>
                             <div class="card-footer bg-white pt-0 border-0 text-left">
                                 <div class="row">
@@ -46,12 +46,12 @@
                                         {% if product.rating %}
                                             <small class="text-muted"><i class="fas fa-star mr-1"></i>{{ product.rating }} / 5</small>
                                         {% else %}
-                                            <small class="text-muted">No Rating</small>
+                                            <small class="text-muted">no rating</small>
                                         {% endif %}
                                         {% if request.user.is_superuser %}
                                             <small class="ml-3">
-                                                <a href="">Edit</a> | 
-                                                <a class="text-danger" href="">Delete</a>
+                                                <a href="">edit</a> | 
+                                                <a class="text-danger" href="">delete</a>
                                             </small>
                                         {% endif %}
                                     </div>
