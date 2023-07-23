@@ -1,19 +1,6 @@
 html {
     height: 100%;
 }
-/*
-body {
-    background: ;
-    background-size: ;
-    height: ;
-    color: ;
-    font-family: ;
-}
-*/
-
-html {
-    height: 100%;
-}
 
 body {
     background: url('/media/felipe-galvan-AhfrA5VQNpM-unsplash.jpg') no-repeat center center fixed;
@@ -90,8 +77,10 @@ h2 {
     z-index: -1;
 }
 
-/* back to top button */
-.btt-button {
+/* back to top button 
+.btt-button { */
+#back-to-top-btn {
+    background-color: #dc3545 !important;
     height: 42px;
     width: 42px;
     position: fixed;

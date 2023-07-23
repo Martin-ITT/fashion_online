@@ -11,8 +11,8 @@
                 </a>
                 <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
                 <a href="{% url 'products' %}?sort=price&direction=asc" class="dropdown-item">by price ↓/↑</a>
-                <a href="{% url 'products' %}?sort=rating&direction=asc" class="dropdown-item">by rating ↓/↑</a>
-                <a href="{% url 'products' %}?sort=category&direction=asc" class="dropdown-item">by category ↓/↑</a>
+                <a href="{% url 'products' %}?sort=rating&direction=desc" class="dropdown-item">by rating ↓/↑</a>
+                <a href="{% url 'products' %}?sort=name&direction=asc" class="dropdown-item">by name ↓/↑</a>
                 <a href="{% url 'products' %}" class="dropdown-item">all products</a>
             </div>
         </li>
@@ -21,7 +21,7 @@
                 women
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="women-link">
-                <a href="{% url 'products' %}?category=women_new_in,women_clothing_dresses" class="dropdown-item">all women</a>
+                <a href="{% url 'products' %}?category=women_new_in,women_clothing_dresses,women_clothing_coats,women_clothing_t_shirts,women_clothing_sweatshirts,women_clothing_shirts,women_clothing_jeans,women_clothing_trousers,women_clothing_skirts,women_clothing_lingerie,women_clothing_sport,women_accessories_bags,women_accessories_watches,women_accessories_sunglasses" class="dropdown-item">all women</a>
                 <a href="{% url 'products' %}?category=women_new_in" class="dropdown-item">new in</a>
                 <a href="{% url 'products' %}?category=women_clothing_dresses" class="dropdown-item">dresses</a>
                 <a href="{% url 'products' %}?category=women_clothing_coats" class="dropdown-item ">coats& jackets</a>
@@ -51,7 +51,7 @@
                 <a href="{% url 'products' %}?category=mmen_clothing_sweatshirts" class="dropdown-item">sweatshirts& hoodies</a>
                 <a href="{% url 'products' %}?category=mmen_clothing_jeans" class="dropdown-item">jeans</a>
                 <a href="{% url 'products' %}?category=mmen_clothing_trousers" class="dropdown-item">trousers</a>
-                <a href="{% url 'products' %}?category=	mmen_clothing_shorts" class="dropdown-item">shorts</a>
+                <a href="{% url 'products' %}?category=mmen_clothing_shorts" class="dropdown-item">shorts</a>
                 <a href="{% url 'products' %}?category=mmen_clothing_underwear" class="dropdown-item">underwear</a>
                 <a href="{% url 'products' %}?category=mmen_clothing_sport" class="dropdown-item">sportswear</a>
                 <a href="{% url 'products' %}?category=mmen_accessories_hats" class="dropdown-item">hats</a>

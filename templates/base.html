@@ -30,6 +30,8 @@
 
     {% block corejs %}
     <script src="https://kit.fontawesome.com/cdc5be118f.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
         crossorigin="anonymous"></script>
@@ -122,6 +124,8 @@
             </nav>
         </div>
     </header>
+    <!-- back to top btn -->
+    <button onclick="topFunction()" id="back-to-top-btn" title="Go to top">▲</button>
 
     {% if messages %}
     <div class="msg-container"></div>
@@ -134,6 +138,38 @@
     {% endblock %}
 
     {% block postload_js %}
+    <!-- toast messages -->
+    <script type="text/javascript">
+    var options = {
+        delay : 5000,
+    }
+    $('.toast').toast(options);
+    $('.toast').toast('show');
+    // stackowerflow toast remains on top invisible
+    $(".toast").on("hidden.bs.toast", function() {
+            $(this).addClass("d-none");
+        })
+    </script>
+
+    <!-- back to top btn -->
+    <script type="text/javascript">
+     
+        var mybutton = document.getElementById("back-to-top-btn");
+        window.onscroll = function() {scrollFunction();};
+    
+        function scrollFunction() {
+        if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+            }
+        }
+    
+        function topFunction() {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
+        </script>
     {% endblock %}
 
 </body>
