@@ -54,15 +54,6 @@
                                 <td class="py-3 d-none d-md-table-cell">
                                     <p class="my-0"><strong>{{ item.product.name }}</strong></p>
                                     <p class="my-0">Size: {% if item.size %} {{ item.size|title }} {% endif %} {% if not item.size %} N/A {% endif %}</p>
-                                    {% if item.drink != 'None' %}
-                                        <p class="my-0">Drink: {{ item.drink|title }}</p>
-                                    {% endif %}
-                                    {% if item.toppings != 'None' %}
-                                        <p class="my-0">Topping(s): </p>
-                                        {% for topping in item.toppings %}
-                                            {{ topping }}{% if forloop.last %}.{% else %}, {% endif %} 
-                                        {% endfor %}
-                                    {% endif %}
                                 </td>
                                 <td class="d-table-cell d-md-none"></td>
                                 <td class="py-3 d-none d-md-table-cell">
@@ -70,7 +61,7 @@
                                 </td>
 
                                 <td class="py-3">
-                                    <form class="form update-form" method="POST" action="{% url 'adjust_bag' item.item_id %}">
+                                    <form class="form update-form" method="POST" action="">
                                         {% csrf_token %}
                                         <div class="form-group">
                                             <div class="input-group">
@@ -110,7 +101,7 @@
                                 </td>
                                 
                                 <td class="py-3 py-3 d-none d-md-table-cell">
-                                    <p class="my-0">€{{ item.subtotal|floatformat:2 }}</p>
+                                    <p class="my-0">€{{ item.total|floatformat:2 }}</p>
                                 </td>
                             </tr>
                             <!-- mobile display -->
@@ -118,15 +109,6 @@
                                 <td class="py-3 d-md-none border-bottom">
                                     <p class="my-0"><strong>{{ item.product.name }}</strong></p>
                                     <p class="my-0">Size: {% if item.size %} {{ item.size|title }} {% endif %} {% if not item.size %} N/A {% endif %}</p>
-                                    {% if item.drink != 'None' %}
-                                        <p class="my-0">Drink: {{ item.drink|title }}</p>
-                                    {% endif %}
-                                    {% if item.toppings != 'None' %}
-                                        <p class="my-0">Topping(s): </p>
-                                        {% for topping in item.toppings %}
-                                            {{ topping }}{% if forloop.last %}.{% else %}, {% endif %} 
-                                        {% endfor %}
-                                    {% endif %}
                                 </td>
                                 <td class="d-md-none border-bottom">
 
@@ -142,16 +124,7 @@
                                 </td>
                             </div>
                         {% endfor %}
-                        <tr>
-                            <td colspan="5" class="pt-md-5 text-right">
-                                <h4 class="mt-4"><strong>Bag Total: €{{ total|floatformat:2 }}</strong></h4>
-                                {% if free_delivery_delta > 0 %}
-                                    <p class="mb-1 text-danger">
-                                        You could get free delivery by spending just <strong>€{{ free_delivery_delta|floatformat:2 }}</strong> more!
-                                    </p>
-                                {% endif %}
-                            </td>
-                        </tr>
+                        
                         <tr>
                             <td colspan="5" class="text-right">
                                 <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0 btn-lg mb-1">
@@ -160,7 +133,7 @@
                                     </span>
                                     <span class="text-uppercase">Keep Shopping</span>
                                 </a>
-                                <a href="{% url 'checkout' %}" class="btn btn-black rounded-0 btn-lg mb-1">
+                                <a href="" class="btn btn-black rounded-0 btn-lg mb-1">
                                     <span class="text-uppercase">Secure Checkout</span>
                                     <span class="icon">
                                         <i class="fas fa-lock"></i>

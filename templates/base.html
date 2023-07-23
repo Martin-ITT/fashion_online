@@ -100,8 +100,8 @@
                             <div class="text-center">
                                 <div><h3 class="bi bi-basket2-fill"></h3></div>
                                 <p class="my-0">
-                                    {% if total %}
-                                    €{{ total|floatformat:2 }}
+                                    {% if grand_total %}
+                                    €{{ grand_total|floatformat:2 }}
                                     {% else %}
                                     €0.00
                                     {% endif %}

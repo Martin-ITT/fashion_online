@@ -50,7 +50,7 @@
               <div><h5 class="bi bi-basket2-fill"></h5></div>
               <p class="my-0">
                   {% if grand_total %}
-                      €{{ total|floatformat:2 }}
+                      €{{ grand_total|floatformat:2 }}
                   {% else %}
                       €0.00
                   {% endif %}
