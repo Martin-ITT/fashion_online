@@ -1,4 +1,3 @@
-from decimal import Decimal
 from django.shortcuts import get_object_or_404
 from products.models import Product
 
@@ -29,8 +28,6 @@ def bag_contents(request):
                 total = quantity * product.price
                 product_count += quantity
                 grand_total += quantity * product.price
-                print("size", size)
-                print("total", total)
                 bag_items.append({
                     'item_id': item_id,
                     'price': product.price,
