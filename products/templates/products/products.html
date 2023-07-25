@@ -41,9 +41,9 @@
                     <div class="col-12 col-md-6 order-md-first">
                         <p class="text-muted text-center text-md-start">
                             {% if search_term or current_categories or current_sorting != 'None_None' %}
-                                <span class="small"><a href="{% url 'products' %}">Products Home</a> | </span>
+                                <span class="small"><a href="{% url 'products' %}">products home</a> | </span>
                             {% endif %}
-                            {{ products|length }} Products{% if search_term %} found for <strong>"{{ search_term }}"</strong>{% endif %}
+                            {{ products|length }} products{% if search_term %} found for <strong>"{{ search_term }}"</strong>{% endif %}
                         </p>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                 <h2>products</h2>
                 {% for c in current_categories %}
                 <a class="category-badge text-decoration-none" href="{% url 'products' %}?category={{ c.name }}">
-                    <span class="p-2 mt-2 badge badge-white text-black rounded-0 border border-dark">{{ c.friendly_name }}</span>
+                    <span class="p-2 mt-2 badge badge-white text-black rounded-0 border border-dark">{{ c.friendly_name | lower }}</span>
                 </a>
                 {% endfor %}
                 <hr class="w-50 mb-1 mx-auto">
@@ -88,7 +88,7 @@
                                         {% if product.category %}
                                         <p class="small mt-1 mb-0">
                                             <a class="text-muted" href="{% url 'products' %}?category={{ product.category.name }}">
-                                                <i class="fas fa-tag me-1"></i>{{ product.category.friendly_name }}
+                                                <i class="fas fa-tag me-1"></i>{{ product.category.friendly_name | lower }}
                                             </a>
                                         </p>
                                         {% endif %}

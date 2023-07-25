@@ -10,18 +10,36 @@ def bag_contents(request):
     grand_total = 0
     bag = request.session.get('bag', {})
 
-    for item_id, quantity in bag.items():
-        product = get_object_or_404(Product, pk=item_id)
-        total = quantity * product.price
-        grand_total += quantity * product.price
-        product_count += quantity
-        bag_items.append({
-            'item_id': item_id,
-            'price': product.price,
-            'quantity': quantity,
-            'product':product,
-            'total': total,
-        })
+    for item_id, item_data in bag.items():
+        if isinstance(item_data, int):
+            product = get_object_or_404(Product, pk=item_id)
+            total = item_data * product.price
+            grand_total += item_data * product.price
+            product_count += item_data
+            bag_items.append({
+                'item_id': item_id,
+                'price': product.price,
+                'quantity': item_data,
+                'product':product,
+                'total': total,
+            })
+        else:
+            product = get_object_or_404(Product, pk=item_id)
+            for size, quantity in item_data['items_by_size'].items():
+                total = quantity * product.price
+                product_count += quantity
+                grand_total += quantity * product.price
+                print("size", size)
+                print("total", total)
+                bag_items.append({
+                    'item_id': item_id,
+                    'price': product.price,
+                    'quantity': quantity,
+                    'product': product,
+                    'size': size,
+                    'total': total,
+
+                })
 
     context = {
         'bag_items': bag_items,
