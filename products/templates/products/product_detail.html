@@ -53,7 +53,7 @@
                 {% endif %}
                 <p class="mt-3">{{ product.description | lower }}</p>
 
-                <form class="form" action="{% url 'add_to_bag' product.id%}" method="POST">
+                <form class="form" action="{% url 'add_to_bag' product.id %}" method="POST">
                     {% csrf_token %}
                     <div class="form-row">
                     {% with product.has_size_s as s %}

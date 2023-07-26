@@ -61,11 +61,13 @@
                                 </td>
 
                                 <td class="py-3">
-                                    <form class="form update-form" method="POST" action="">
+                                    <form class="form update-form" method="POST" action="{% url 'adjust_bag' item.item_id %}">
                                         {% csrf_token %}
                                         <div class="form-group">
                                             <div class="input-group">
-                                            
+                                                <!--
+                                                <div class="input-group-prepend">
+                                                -->
                                                 <div>
                                                     <button class="decrement-qty btn btn-sm btn-black rounded-0" 
                                                         data-item_id="{{ item.id_selector }}"
@@ -80,6 +82,9 @@
                                                     data-item_id="{{ item.id_selector }}"
                                                     id="id_qty_{{ item.id_selector }}">
                                                 <div>
+                                                    <!--
+                                                <div class="input-group-append">
+                                                -->
                                                     <button class="increment-qty btn btn-sm btn-black rounded-0"
                                                         data-item_id="{{ item.id_selector }}"
                                                          id="increment-qty_{{ item.id_selector }}">
@@ -89,8 +94,8 @@
                                                     </button>
                                                 </div>
                                               
-                                                {% if item.product_data %}
-                                                    <input type="hidden" name="product_size" value="{{ item.id_selector }}">
+                                                {% if item.product.has_size_s or item.product.has_size_96 %}
+                                                    <input type="hidden" name="product_size" value="{{ item.size }}">
                                                 {% endif %}
         
                                             </div>
@@ -126,7 +131,7 @@
                         {% endfor %}
                         
                         <tr>
-                            <td colspan="5" class="text-right">
+                            <td colspan="5" class="text-end">
                                 <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0 btn-lg mb-1">
                                     <span class="icon">
                                         <i class="fas fa-chevron-left"></i>
@@ -161,5 +166,27 @@
 
 {% block postload_js %}
 {{ block.super }}
-{% include 'products/includes/quantity_input_script.html' %}
+{% include 'bag/includes/bag_quantity_input_script.html' %}
+
+<script type="text/javascript">
+    // Update quantity on click
+    $('.update-link').click(function(e) {
+        var form = $(this).prev('.update-form');
+        form.submit();
+    })
+
+  // Remove item and reload on click
+    $('.remove-item').click(function(e) {
+        var csrfToken = "{{ csrf_token }}";
+        var itemId = $(this).attr('id').split('remove_')[1];
+        var size = $(this).data('product_size');
+        var url = `/bag/remove/${itemId}/`;
+        var data = {'csrfmiddlewaretoken': csrfToken, 'product_size': size};
+
+        $.post(url, data)
+         .done(function() {
+             location.reload();
+         });
+    })
+</script>
 {% endblock %}
