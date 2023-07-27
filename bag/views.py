@@ -85,6 +85,8 @@ def adjust_bag(request, item_id):
 
 def remove_from_bag(request, item_id):
     """Remove the item from the shopping bag"""
+    print("req", request)
+    print("id", item_id)
 
     try:
         product = get_object_or_404(Product, pk=item_id)
