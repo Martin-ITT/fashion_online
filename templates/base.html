@@ -127,7 +127,21 @@
     <button onclick="topFunction()" id="back-to-top-btn" title="Go to top">▲</button>
 
     {% if messages %}
-    <div class="msg-container"></div>
+    <div class="message-container">
+        {% for message in messages %}
+            {% with message.level as level %}
+            {% if level == 40 %}
+                {% include 'includes/toasts/toast_error.html' %}
+            {% elif level == 30 %}
+                {% include 'includes/toasts/toast_warning.html' %}
+            {% elif level == 25 %}
+                {% include 'includes/toasts/toast_success.html' %}
+            {% else %}
+                {% include 'includes/toasts/toast_info.html' %}
+            {% endif %}
+            {% endwith %}
+        {% endfor %}
+    </div>
     {% endif %}
 
     {% block page_header %}
@@ -139,15 +153,18 @@
     {% block postload_js %}
     <!-- toast messages -->
     <script type="text/javascript">
+    window.setTimeout(function() {
+        $('div.toast').toggleClass('show');
+    }, 5000);
     //var options = {
-    //    delay : 5000,
+        //delay : 5000,
     //}
     //$('.toast').toast(options);
     //$('.toast').toast('show');
-        // stackowerflow toast remains on top invisible
+      // stackowerflow toast remains on top invisible
     //$(".toast").on("hidden.bs.toast", function() {
-     //       $(this).addClass("d-none");
-    //    })
+            //$(this).addClass("d-none");
+        //})
     </script>
 
     <!-- back to top btn -->
