@@ -27,20 +27,20 @@ def add_to_bag(request, item_id):
         if item_id in list(bag.keys()):
             if size in bag[item_id]['items_by_size'].keys():
                 bag[item_id]['items_by_size'][size] += quantity
-                messages.success(request, f'Updated size {size.upper()} {product.name} quantity to {bag[item_id]["items_by_size"][size]}')
+                messages.success(request, f'updated {product.name.lower()} - size {size} quantity to {bag[item_id]["items_by_size"][size]}')
             else:
                 bag[item_id]['items_by_size'][size] = quantity
-                messages.success(request, f'Added size {size.upper()} {product.name} to your bag')
+                messages.success(request, f'added {product.name.lower()} - size {size} to your bag')
         else:
             bag[item_id] = {'items_by_size': {size: quantity}}
-            messages.success(request, f'Added size {size.upper()} {product.name} to your bag')
+            messages.success(request, f'added {product.name.lower()} - size {size} to your bag')
     else:
         if item_id in list(bag.keys()):
             bag[item_id] += quantity
-            messages.success(request, f'Updated {product.name} quantity to {bag[item_id]}')
+            messages.success(request, f'updated {product.name.lower()} quantity to {bag[item_id]}')
         else:
             bag[item_id] = quantity
-            messages.success(request, f'Added {product.name} to your bag')
+            messages.success(request, f'added {product.name.lower()} to your bag')
 
     
     request.session['bag'] = bag
@@ -57,28 +57,22 @@ def adjust_bag(request, item_id):
     if 'product_size' in request.POST:
         size = request.POST['product_size']
     bag = request.session.get('bag', {})
-    print("--------------------------------------")
 
     if size:
         if quantity > 0:
-            print("Running logic 1")
             bag[item_id]['items_by_size'][size] = quantity
-            messages.success(request, f'Updated size {size.upper()} {product.name} quantity to {bag[item_id]["items_by_size"][size]}')
+            messages.success(request, f'updated {product.name.lower()} - size {size} quantity to {bag[item_id]["items_by_size"][size]}')
         else:
-            print("Running logic 2")
             del bag[item_id]['items_by_size'][size]
             if not bag[item_id]['items_by_size']:
-                print("Running logic 3")
                 bag.pop(item_id)
-            messages.success(request, f'Removed size {size.upper()} {product.name} from your bag')
+            messages.success(request, f'removed {product.name.lower()} - size {size} from your bag')
     else:
         if quantity > 0:
-            print("Running logic 4")
             bag[item_id] = quantity
         else:
-            print("Running logic 5")
             bag.pop(item_id)
-            messages.success(request, f'Removed {product.name} from your bag')
+            messages.success(request, f'removed {product.name.lower()} from your bag')
 
     request.session['bag'] = bag
     return redirect(reverse('view_bag'))
@@ -100,14 +94,14 @@ def remove_from_bag(request, item_id):
             del bag[item_id]['items_by_size'][size]
             if not bag[item_id]['items_by_size']:
                 bag.pop(item_id)
-            messages.success(request, f'Removed size {size.upper()} {product.name} from your bag')
+            messages.success(request, f'removed {product.name.lower()} - size {size} from your bag')
         else:
             bag.pop(item_id)
-            messages.success(request, f'Removed {product.name} from your bag')
+            messages.success(request, f'removed {product.name.lower()} from your bag')
 
         request.session['bag'] = bag
         return HttpResponse(status=200)
 
     except Exception as e:
-        messages.error(request, f'Error removing item: {e}')
+        messages.error(request, f'error removing item: {e}')
         return HttpResponse(status=500)

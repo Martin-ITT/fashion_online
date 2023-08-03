@@ -1,7 +1,7 @@
 <div class="toast my-toast show" role="alert">
   
     <div class="toast-header bg-success">
-        <strong class="me-auto ml-2  text-white">Success!</strong>
+        <strong class="me-auto ms-2  text-white">success!</strong>
         <!--
         <button type="button" class="ml-2 mb-1 close text-dark" data-dismiss="toast" aria-label="Close">
             <span class="text-white float-right me-2 d-none"></span>
@@ -16,11 +16,11 @@
             </div>
         </div>
         {% if total and not on_profile_page %}
-        <p class="logo-font bg-white text-black py-1 ml-2">Your Bag ({{ product_count }})</p>
+        <p class="bg-white text-black py-1 ms-2">your bag ({{ product_count }})</p>
         <div class="bag-notification-wrapper">
             {% for item in bag_items %}
             <div class="row">
-                <div class="col-3 my-1 ml-3">
+                <div class="col-3 my-1 ms-3">
                     {% if item.product.image %}
                         <img class="w-100" src="{{ item.product.image.url }}" alt="{{ product.name }}">
                     {% else %}
@@ -28,14 +28,22 @@
                     {% endif %}
                 </div>
                 <div class="col-8">
-                    <p class="my-0"><strong>{{ item.product.name }}</strong></p>
-                    <p class="my-0 small">Size: {% if item.size %} {{ item.size|title }} {% endif %}
-                        {% if not item.size %} N/A {% endif %}</p>
-                    <p class="my-0 small text-muted">Qty: {{ item.quantity }}</p>
+                    <p class="my-0"><strong>{{ item.product.name|lower }}</strong></p>
+                    <p class="my-0 small">size: {% if item.size %} {{ item.size }} {% endif %}
+                        {% if not item.size %} n/a {% endif %}</p>
+                    <p class="my-0 small text-muted">qty: {{ item.quantity }}</p>
                 </div>
             </div>
             {% endfor %}
         </div>
         {% endif %}
+    </div>
+    <div class="col text-center mb-2 font-small">
+        <a href="{% url 'view_bag' %}" class="btn btn-black btn-block rounded-0">
+            <span class="">secure checkout</span>
+            <span class="icon">
+                <i class="fas fa-lock"></i>
+            </span>
+        </a>
     </div>
 </div>

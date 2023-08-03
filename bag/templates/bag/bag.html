@@ -18,7 +18,7 @@
     <div class="row">
         <div class="col text-center">
             <hr>
-            <h2 class="logo-font mb-4 m-auto">shopping bag</h2>
+            <h2 class="mb-4 m-auto">shopping bag</h2>
             <hr>
         </div>
     </div>
@@ -31,11 +31,11 @@
                     <table class="table table-sm table-borderless">
                         <thead class="text-black">
                             <tr>
-                                <th scope="col">Product Info</th>
+                                <th scope="col">product info</th>
                                 <th scope="col"></th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Qty</th>
-                                <th scope="col">Subtotal</th>
+                                <th scope="col">price</th>
+                                <th scope="col">qty</th>
+                                <th scope="col">subtotal</th>
                             </tr>
                         </thead>
 
@@ -52,8 +52,8 @@
                                 {% endif %}
                                 <td class="d-table-cell d-md-none"></td>
                                 <td class="py-3 d-none d-md-table-cell">
-                                    <p class="my-0"><strong>{{ item.product.name }}</strong></p>
-                                    <p class="my-0">Size: {% if item.size %} {{ item.size|title }} {% endif %} {% if not item.size %} N/A {% endif %}</p>
+                                    <p class="my-0"><strong>{{ item.product.name|lower }}</strong></p>
+                                    <p class="my-0">Size: {% if item.size %} {{ item.size }} {% endif %} {% if not item.size %} n/a {% endif %}</p>
                                 </td>
                                 <td class="d-table-cell d-md-none"></td>
                                 <td class="py-3 d-none d-md-table-cell">
@@ -101,8 +101,8 @@
                                             </div>
                                         </div>
                                     </form>
-                                    <a class="update-link text-success"><small>Update</small></a>
-                                    <a class="remove-item text-danger float-right" id="remove_{{ item.item_id }}" data-product_size="{{ item.size }}"><small>Remove</small></a>
+                                    <a class="update-link text-success"><small>update</small></a>
+                                    <a class="remove-item text-danger float-right" id="remove_{{ item.item_id }}" data-product_size="{{ item.size }}"><small>remove</small></a>
                                 </td>
                                 
                                 <td class="py-3 py-3 d-none d-md-table-cell">
@@ -113,7 +113,7 @@
                             <div class="row">
                                 <td class="py-3 d-md-none border-bottom">
                                     <p class="my-0"><strong>{{ item.product.name }}</strong></p>
-                                    <p class="my-0">Size: {% if item.size %} {{ item.size|title }} {% endif %} {% if not item.size %} N/A {% endif %}</p>
+                                    <p class="my-0">Size: {% if item.size %} {{ item.size|title }} {% endif %} {% if not item.size %} n/a {% endif %}</p>
                                 </td>
                                 <td class="d-md-none border-bottom">
 
@@ -136,10 +136,10 @@
                                     <span class="icon">
                                         <i class="fas fa-chevron-left"></i>
                                     </span>
-                                    <span class="text-uppercase">Keep Shopping</span>
+                                    <span class="">keep shopping</span>
                                 </a>
                                 <a href="" class="btn btn-black rounded-0 btn-lg mb-1">
-                                    <span class="text-uppercase">Secure Checkout</span>
+                                    <span class="">secure checkout</span>
                                     <span class="icon">
                                         <i class="fas fa-lock"></i>
                                     </span>
