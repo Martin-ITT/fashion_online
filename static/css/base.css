@@ -81,8 +81,8 @@ h2 {
 .btt-button { */
 #back-to-top-btn {
     background-color: #dc3545 !important;
-    height: 42px;
-    width: 42px;
+    height: 32px;
+    width: 32px;
     position: fixed;
     bottom: 10px;
     right: 10px;
