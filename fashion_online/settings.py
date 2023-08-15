@@ -26,7 +26,9 @@ SECRET_KEY = 'django-insecure-38pwty^)cqau@c*2cv7dhe!i=m&nqak4sd)0v0@5g0&)50qrle
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
+CSRF_TRUSTED_ORIGINS = ['https://8000-martinitt-fashiononline-ew4ur5b99kf.ws-eu103.gitpod.io']
 
 
 # Application definition
@@ -47,6 +49,7 @@ INSTALLED_APPS = [
     'products',
     'bag',
     'checkout',
+    'profiles',
 
     # Other
 
