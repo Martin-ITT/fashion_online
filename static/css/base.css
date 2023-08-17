@@ -10,6 +10,19 @@ body {
     font-family: 'Sono', sans-serif;
 }
 
+h1 {
+    color:green;
+}
+body {
+    text-align:center;
+    width:60%;
+}
+/* lower cases on country crispy form */
+select[id^="id_default_country"], /*https://stackoverflow.com/questions/5110249/wildcard-in-css-for-classes*/
+select[id^="id_country"] {
+    text-transform: lowercase;
+}
+
 h2 {
     font-size: 1.5rem;
 }
@@ -124,6 +137,9 @@ a.category-badge > span.badge:hover {
 
 /* Allauth form formatting */
 
+.allauth-form-inner-content {
+    margin-top: -2rem;
+}
 .allauth-form-inner-content p {
     margin-top: 1.5rem; /* mt-4 */
     color: #6c757d; /* text-secondary */
