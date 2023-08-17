@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = ['https://8000-martinitt-fashiononline-ew4ur5b99kf.ws-eu103.gitpod.io']
+CSRF_TRUSTED_ORIGINS = ['https://8000-martinitt-fashiononline-ew4ur5b99kf.ws-eu104.gitpod.io']
 
 
 # Application definition

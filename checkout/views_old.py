@@ -17,18 +17,18 @@ import json
 @require_POST
 def cache_checkout_data(request):
     try:
+        # Payment intent ID = pid
         pid = request.POST.get('client_secret').split('_secret')[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
         stripe.PaymentIntent.modify(pid, metadata={
             'bag': json.dumps(request.session.get('bag', {})),
             'save_info': request.POST.get('save_info'),
-            'comment': request.POST.get('comment'),
             'username': request.user,
         })
         return HttpResponse(status=200)
     except Exception as e:
-        messages.error(request, 'Your payment did not go through. \
-            Please call the restaurant for assistance.')
+        messages.error(request, 'Sorry, your payment cannot be \
+            processed right now. Please try again later.')
         return HttpResponse(content=e, status=400)
 
 
@@ -37,7 +37,6 @@ def checkout(request):
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
     if request.method == 'POST':
-        print("1")
         bag = request.session.get('bag', {})
 
         form_data = {
@@ -53,7 +52,6 @@ def checkout(request):
         }
         order_form = OrderForm(form_data)
         if order_form.is_valid():
-            print("2")
             order = order_form.save(commit=False)
             pid = request.POST.get('client_secret').split('_secret')[0]
             order.stripe_pid = pid
@@ -63,7 +61,6 @@ def checkout(request):
                 try:
                     product = Product.objects.get(id=item_id)
                     if isinstance(item_data, int):
-                        print("3")
                         order_line_item = OrderLineItem(
                             order=order,
                             product=product,
@@ -71,7 +68,6 @@ def checkout(request):
                         )
                         order_line_item.save()
                     else:
-                        print("4")
                         for size, quantity in item_data['items_by_size'].items():
                             order_line_item = OrderLineItem(
                                 order=order,
@@ -91,11 +87,9 @@ def checkout(request):
             request.session['save_info'] = 'save-info' in request.POST
             return redirect(reverse('checkout_success', args=[order.order_number]))
         else:
-            print("5")
             messages.error(request, 'There was an error with your form. \
                 Please double check your information.')
     else:
-        print("6")
         bag = request.session.get('bag', {})
         if not bag:
             messages.error(request, "There's nothing in your bag at the moment")
@@ -109,10 +103,8 @@ def checkout(request):
             amount=stripe_total,
             currency=settings.STRIPE_CURRENCY,
         )
-        print("view's intent", intent)
 
         if request.user.is_authenticated:
-            print("7")
             try:
                 profile = UserProfile.objects.get(user=request.user)
                 order_form = OrderForm(initial={
@@ -129,17 +121,14 @@ def checkout(request):
             except UserProfile.DoesNotExist:
                 order_form = OrderForm()
         else:
-            print("8")
             order_form = OrderForm()
 
     if not stripe_public_key:
-        print("9")
         messages.warning(request, 'Stripe public key is missing. \
             Did you forget to set it in your environment?')
 
-    print("Intent 2 type: ", type(intent))
-    print("Intent 2: ", intent)
     template = 'checkout/checkout.html'
+    print(intent)
     context = {
         'order_form': order_form,
         'stripe_public_key': stripe_public_key,

@@ -76,6 +76,10 @@
                         {{ order_form.email | as_crispy_field }}
                     </fieldset>
                     <fieldset class="rounded px-3 mb-5">
+                        <legend class="fieldset-label small text-black px-2 w-auto">instructions:</legend>
+                            {{ order_form.comment | as_crispy_field }}
+                       </fieldset>
+                    <fieldset class="rounded px-3 mb-5">
                         <legend class="fieldset-label small text-black px-2 w-auto">delivery</legend>
                         {{ order_form.phone_number | as_crispy_field }}
                         {{ order_form.street_address1 | as_crispy_field }}

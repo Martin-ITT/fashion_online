@@ -5,8 +5,9 @@ from django.conf import settings
 
 from .models import Order, OrderLineItem
 from products.models import Product
-#from profiles.models import UserProfile
+from profiles.models import UserProfile
 
+import stripe
 import json
 import time
 
@@ -51,9 +52,12 @@ class StripeWH_Handler:
         bag = intent.metadata.bag
         save_info = intent.metadata.save_info
 
-        billing_details = intent.charges.data[0].billing_details
+        # Get the charge object
+        stripe_charge = stripe.Charge.retrieve(intent.latest_charge)
+
+        billing_details = stripe_charge.billing_details
         shipping_details = intent.shipping
-        grand_total = round(intent.charges.data[0].amount / 100, 2)
+        grand_total = round(stripe_charge.amount / 100, 2)
 
         # Clean data in the shipping details
         for field, value in shipping_details.address.items():

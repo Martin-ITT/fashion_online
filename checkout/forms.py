@@ -25,7 +25,7 @@ class OrderForm(forms.ModelForm):
             'street_address1': 'street address 1',
             'street_address2': 'street address 2',
             'county': 'county',
-            'comment': 'additional information'
+            'comment': 'additional information',
         }
 
         self.fields['full_name'].widget.attrs['autofocus'] = True
@@ -41,5 +41,5 @@ class OrderForm(forms.ModelForm):
                 'stripe-style-input w-100 mb-1')
             self.fields[field].label = False
             self.fields['comment'].widget.attrs['style'] = (
-                'min-height:5rem'
+                'min-height:3rem'
             )
