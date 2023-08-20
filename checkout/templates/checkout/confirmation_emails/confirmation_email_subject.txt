@@ -1,0 +1,1 @@
+fashion OnLINE - order: {{ order.order_number }} confirmed!
