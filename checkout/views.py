@@ -8,6 +8,7 @@ from .models import Order, OrderLineItem
 from products.models import Product
 from profiles.forms import UserProfileForm
 from profiles.models import UserProfile
+# function from context processor will be used to calculate the total amount for Stripe
 from bag.contexts import bag_contents
 
 import stripe
@@ -94,17 +95,20 @@ def checkout(request):
             print("5")
             messages.error(request, 'There was an error with your form. \
                 Please double check your information.')
+    # handle GET request
     else:
         print("6")
         bag = request.session.get('bag', {})
         if not bag:
             messages.error(request, "There's nothing in your bag at the moment")
             return redirect(reverse('products'))
-
+        # get bag content
         current_bag = bag_contents(request)
+        # calculate total for stripe
         total = current_bag['grand_total']
         stripe_total = round(total * 100)
         stripe.api_key = stripe_secret_key
+        # creating payment intent from provided variables
         intent = stripe.PaymentIntent.create(
             amount=stripe_total,
             currency=settings.STRIPE_CURRENCY,

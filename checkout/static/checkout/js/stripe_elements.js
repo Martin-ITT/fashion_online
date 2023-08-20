@@ -99,6 +99,7 @@ form.addEventListener('submit', function(ev) {
                     state: $.trim(form.county.value),
                 }
             },
+            // when status of the payment intent comes back
         }).then(function(result) {
             if (result.error) {
                 var errorDiv = document.getElementById('card-errors');

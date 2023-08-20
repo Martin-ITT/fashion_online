@@ -5,18 +5,12 @@ html {
 body {
     background: url('/media/felipe-galvan-AhfrA5VQNpM-unsplash.jpg') no-repeat center center fixed;
     background-size: cover;
+    background-position: center top; 
     height: calc(100vh - 190px);
     color: #555;
     font-family: 'Sono', sans-serif;
 }
 
-h1 {
-    color:green;
-}
-body {
-    text-align:center;
-    width:60%;
-}
 /* lower cases on country crispy form */
 select[id^="id_default_country"], /*https://stackoverflow.com/questions/5110249/wildcard-in-css-for-classes*/
 select[id^="id_country"] {

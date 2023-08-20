@@ -155,8 +155,13 @@
     <!-- toast messages -->
     <script type="text/javascript">
     window.setTimeout(function() {
-        $('div.toast').toggleClass('show');
+        $('div.toast').removeClass('show');
     }, 5000);
+
+    $( "#toast-exit" ).on( "click", function() {
+        $('div.toast').removeClass('show');
+        }
+    );
     </script>
 
     <!-- back to top btn -->
