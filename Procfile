@@ -1,1 +1,1 @@
-web: gunicorn fashion-online.wsgi:application
+web: gunicorn fashion_online.wsgi:application
