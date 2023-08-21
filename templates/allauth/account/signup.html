@@ -1,0 +1,24 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "signup" %}{% endblock %}
+
+{% block inner_content %}
+<hr>
+<h2 class="mb-2">{% trans "sign up" %}</h2>
+<hr>
+
+<p>{% blocktrans %}already have an account? then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+
+<form class="signup mb-4" id="signup_form" method="post" action="{% url 'account_signup' %}">
+  {% csrf_token %}
+  {{ form|crispy|lower }}
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+  <a class="btn btn-outline-black rounded-0" href="{% url 'account_login' %}">back to login</a>
+  <button type="submit">{% trans "sign up" %}</button>
+</form>
+
+{% endblock %}

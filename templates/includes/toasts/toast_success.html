@@ -1,0 +1,51 @@
+<div class="toast my-toast show" role="alert">
+  
+    <div class="toast-header bg-success">
+        <strong class="me-auto ms-2 text-white">success!</strong>
+        <button type="button" class="ms-2 bg-dark mb-1 close" id="toast-exit" data-dismiss="toast" aria-label="Close">
+            <span class="text-white float-right ms-1 me-1">X</span>
+        </button>
+    </div>
+    <div class="toast-body bg-white">
+        <div class="row">
+            <div class="col">
+                {{ message }}
+                <hr class="mt-1 mb-3">
+            </div>
+        </div>
+        {% if total and not on_profile_page %}
+            <p class="bg-white text-black py-1 ms-2">your bag ({{ product_count }})</p>
+            <div class="bag-notification-wrapper">
+            {% for item in bag_items %}
+                <div class="row">
+                    <div class="col-3 my-1 ms-3">
+                        {% if item.product.image %}
+                            <img class="w-100" src="{{ item.product.image.url }}" alt="{{ product.name }}">
+                        {% else %}
+                            <img class="w-100" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+                        {% endif %}
+                    </div>
+                    <div class="col-8">
+                        <p class="my-0"><strong>{{ item.product.name|lower }}</strong></p>
+                        <p class="my-0 small">size: {% if item.size %} {{ item.size }} {% endif %}
+                            {% if not item.size %} n/a {% endif %}</p>
+                        <p class="my-0 small text-muted">qty: {{ item.quantity }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="col text-center mb-2 font-small">
+                    <a href="{% url 'view_bag' %}" class="btn btn-black btn-block rounded-0">
+                        <span class="">secure checkout</span>
+                        <span class="icon">
+                        <i class="fas fa-lock"></i>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    </div>
+</div>

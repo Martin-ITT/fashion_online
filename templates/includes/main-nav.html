@@ -1,0 +1,100 @@
+<div class="collapse navbar-collapse" id="main-nav">
+    <ul class="navbar-nav w-auto mx-auto">
+        <li class="d-block d-lg-none">
+            <a class="nav-link text-black me-5" href="{% url 'home' %}" id="all-products-link">
+                home
+            </a>
+        </li>
+        <li class="nav-item dropdown">
+                <a class="nav-link text-black me-5" href="#" id="all-products-link" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    all products
+                </a>
+                <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
+                <a href="{% url 'products' %}?sort=price&direction=asc" class="dropdown-item">by price ↓/↑</a>
+                <a href="{% url 'products' %}?sort=rating&direction=desc" class="dropdown-item">by rating ↓/↑</a>
+                <a href="{% url 'products' %}?sort=name&direction=asc" class="dropdown-item">by name ↓/↑</a>
+                <a href="{% url 'products' %}" class="dropdown-item">all products</a>
+            </div>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link text-black me-5" href="#" id="women-link" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                women
+            </a>
+            <div class="dropdown-menu border-0" aria-labelledby="women-link">
+                <a href="{% url 'products' %}?category=women_new_in,women_clothing_dresses,women_clothing_coats,women_clothing_t_shirts,women_clothing_sweatshirts,women_clothing_shirts,women_clothing_jeans,women_clothing_trousers,women_clothing_skirts,women_clothing_lingerie,women_clothing_sport,women_accessories_bags,women_accessories_watches,women_accessories_sunglasses" class="dropdown-item">all women</a>
+                <a href="{% url 'products' %}?category=women_new_in" class="dropdown-item">new in</a>
+                <a href="{% url 'products' %}?category=women_clothing_dresses" class="dropdown-item">dresses</a>
+                <a href="{% url 'products' %}?category=women_clothing_coats" class="dropdown-item ">coats& jackets</a>
+                <a href="{% url 'products' %}?category=women_clothing_t_shirts" class="dropdown-item ">t-shirts</a>
+                <a href="{% url 'products' %}?category=women_clothing_sweatshirts" class="dropdown-item ">sweatshirts& hoodies</a>
+                <a href="{% url 'products' %}?category=women_clothing_shirts" class="dropdown-item ">shirts</a>
+                <a href="{% url 'products' %}?category=women_clothing_jeans" class="dropdown-item ">jeans</a>
+                <a href="{% url 'products' %}?category=women_clothing_trousers" class="dropdown-item ">trousers</a>
+                <a href="{% url 'products' %}?category=women_clothing_skirts" class="dropdown-item ">skirts</a>
+                <a href="{% url 'products' %}?category=women_clothing_lingerie" class="dropdown-item ">lingerie</a>
+                <a href="{% url 'products' %}?category=women_clothing_sport" class="dropdown-item ">sportswear</a>
+                <a href="{% url 'products' %}?category=women_accessories_bags" class="dropdown-item ">bags</a>
+                <a href="{% url 'products' %}?category=women_accessories_watches" class="dropdown-item ">watches</a>
+                <a href="{% url 'products' %}?category=women_accessories_sunglasses" class="dropdown-item ">sunglasses</a>
+            </div>
+        </li>
+
+        <li class="nav-item dropdown">
+            <a class="nav-link text-black me-5" href="#" id="mmens-link" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                men
+            </a>
+            <div class="dropdown-menu border-0" aria-labelledby="mmens-link">
+                <a href="{% url 'products' %}?category=mmen_new_in" class="dropdown-item">new in</a>
+                <a href="{% url 'products' %}?category=mmen_clothing_t_shirts" class="dropdown-item">polo& t-shirts</a>
+                <a href="{% url 'products' %}?category=mmen_clothing_shirts" class="dropdown-item">shirts</a>
+                <a href="{% url 'products' %}?category=mmen_clothing_coats" class="dropdown-item">coats& jackets</a>
+                <a href="{% url 'products' %}?category=mmen_clothing_sweatshirts" class="dropdown-item">sweatshirts& hoodies</a>
+                <a href="{% url 'products' %}?category=mmen_clothing_jeans" class="dropdown-item">jeans</a>
+                <a href="{% url 'products' %}?category=mmen_clothing_trousers" class="dropdown-item">trousers</a>
+                <a href="{% url 'products' %}?category=mmen_clothing_shorts" class="dropdown-item">shorts</a>
+                <a href="{% url 'products' %}?category=mmen_clothing_underwear" class="dropdown-item">underwear</a>
+                <a href="{% url 'products' %}?category=mmen_clothing_sport" class="dropdown-item">sportswear</a>
+                <a href="{% url 'products' %}?category=mmen_accessories_hats" class="dropdown-item">hats</a>
+                <a href="{% url 'products' %}?category=mmen_accessories_watches" class="dropdown-item">watches</a>
+                <a href="{% url 'products' %}?category=mmen_accessories_wallets" class="dropdown-item">wallets</a>
+                <a href="{% url 'products' %}?category=mmen_accessories_belts" class="dropdown-item">belts</a>
+                <a href="{% url 'products' %}?category=mmen_accessories_sunglasses" class="dropdown-item">sunglasses</a>
+            </div>
+        </li>
+
+        <li class="nav-item dropdown">
+            <a class="nav-link text-black me-5" href="#" id="girls-link" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                girls
+            </a>
+            <div class="dropdown-menu border-0" aria-labelledby="girls-link">
+                <a href="{% url 'products' %}?category=girls_new_in" class="dropdown-item">new in</a>
+                <a href="{% url 'products' %}?category=girls_tops" class="dropdown-item">tops</a>
+                <a href="{% url 'products' %}?category=girls_trousers_skirts" class="dropdown-item">trousers& skirts</a>
+                <a href="{% url 'products' %}?category=shoes" class="dropdown-item">shoes</a>
+            </div>
+        </li>
+
+        <li class="nav-item dropdown">
+            <a class="nav-link text-black me-5" href="#" id="boys-link" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                boys
+            </a>
+            <div class="dropdown-menu border-0" aria-labelledby="boys-link">
+                <a href="{% url 'products' %}?category=boys_new_in" class="dropdown-item">new in</a>
+                <a href="{% url 'products' %}?category=boys_tops" class="dropdown-item">tops</a>
+                <a href="{% url 'products' %}?category=boys_trousers_shorts" class="dropdown-item">trousers& shorts</a>
+                <a href="{% url 'products' %}?category=shoes" class="dropdown-item">shoes</a>
+            </div>
+        </li>
+
+        <li class="nav-item dropdown">
+            <a class="nav-link text-black me-5" href="#" id="baby-link" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                babies
+            </a>
+            <div class="dropdown-menu border-0" aria-labelledby="baby-link">
+                <a href="{% url 'products' %}?category=new_in" class="dropdown-item">new in</a>
+                <a href="{% url 'products' %}?category=babies_body_suits" class="dropdown-item">body suits</a>
+                <a href="{% url 'products' %}?category=babies_sets" class="dropdown-item">sets</a>
+            </div>
+        </li>
+    </ul>
+</div>

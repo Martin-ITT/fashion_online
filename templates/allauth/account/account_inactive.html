@@ -1,0 +1,13 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "account inactive" %}{% endblock %}
+
+{% block inner_content %}
+<hr>
+<h2 class="logo-font mb-4">{% trans "account inactive" %}</h2>
+<hr>
+
+<p>{% trans "this account is inactive." %}</p>
+{% endblock %}

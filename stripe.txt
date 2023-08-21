@@ -1,0 +1,14 @@
+Stripe works with payment intents
+1, Checkout view creates Stripe paymentIntent for the current amount of the shopping bag
+2, Stripe returns client_secret whis needs to be returned to the template
+3, JS on client side we'll call the confirm card payment from Stripe JS using the client_secret which will verify the card
+
+1, we need a function which will calculate the total amount
+creating payment intent - 44/43
+2, create an intent - line 111 views.py 
+adding a listener to payment form submitted event - 45/44
+3, JS handle form submit function
+create webhooks - 50/49
+4, create webhook_handler
+create listener - 51/50
+
