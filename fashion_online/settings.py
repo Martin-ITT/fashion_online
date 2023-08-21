@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEVELOPMENT' in os.environ
 
-# ALLOWED_HOSTS = ['fashion-online.herokuapp.com', 'localhost']
+# ALLOWED_HOSTS = ['fashion-online-62fa8e397007.herokuapp.com', 'localhost']
 ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = ['https://8000-martinitt-fashiononline-ew4ur5b99kf.ws-eu104.gitpod.io']
@@ -131,6 +131,7 @@ if 'DATABASE_URL' in os.environ:
     DATABASES = {
         'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
     }
+    print("PG DB attached")
 else:
     DATABASES = {
         'default': {
@@ -138,6 +139,7 @@ else:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+    print("Local SQLite attached")
 
 
 # Password validation
