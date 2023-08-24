@@ -14,8 +14,16 @@ def profile(request):
 
     if request.method == 'POST':
         form = UserProfileForm(request.POST, instance=profile)
+        user = request.user
         if form.is_valid():
             form.save()
+            # save user_name
+            if 'first_name' in request.POST:
+                user.first_name = request.POST['first_name']
+                user.save()
+            if 'last_name' in request.POST:
+                user.last_name = request.POST['last_name']
+                user.save()
             messages.success(request, 'profile updated successfully')
         else:
             messages.error(request, 'update failed. please ensure the form is valid.')

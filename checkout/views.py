@@ -38,11 +38,11 @@ def checkout(request):
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
     if request.method == 'POST':
-        print("1")
         bag = request.session.get('bag', {})
 
         form_data = {
-            'full_name': request.POST['full_name'],
+            'first_name': request.POST['first_name'],
+            'last_name': request.POST['last_name'],
             'email': request.POST['email'],
             'phone_number': request.POST['phone_number'],
             'country': request.POST['country'],
@@ -54,7 +54,6 @@ def checkout(request):
         }
         order_form = OrderForm(form_data)
         if order_form.is_valid():
-            print("2")
             order = order_form.save(commit=False)
             pid = request.POST.get('client_secret').split('_secret')[0]
             order.stripe_pid = pid
@@ -64,7 +63,6 @@ def checkout(request):
                 try:
                     product = Product.objects.get(id=item_id)
                     if isinstance(item_data, int):
-                        print("3")
                         order_line_item = OrderLineItem(
                             order=order,
                             product=product,
@@ -72,7 +70,6 @@ def checkout(request):
                         )
                         order_line_item.save()
                     else:
-                        print("4")
                         for size, quantity in item_data['items_by_size'].items():
                             order_line_item = OrderLineItem(
                                 order=order,
@@ -89,15 +86,29 @@ def checkout(request):
                     order.delete()
                     return redirect(reverse('view_bag'))
 
+            if request.user.is_authenticated:
+                # save user name
+                try:
+                    user = request.user
+                    if 'first_name' in request.POST:
+                        user.first_name = request.POST['first_name']
+                        user.save()
+                    if 'last_name' in request.POST:
+                        user.last_name = request.POST['last_name']
+                        user.save()
+
+                except NameError:
+                    messages.error(request, (
+                        "User not logged in!")
+                    )
+
             request.session['save_info'] = 'save-info' in request.POST
             return redirect(reverse('checkout_success', args=[order.order_number]))
         else:
-            print("5")
             messages.error(request, 'There was an error with your form. \
                 Please double check your information.')
     # handle GET request
     else:
-        print("6")
         bag = request.session.get('bag', {})
         if not bag:
             messages.error(request, "There's nothing in your bag at the moment")
@@ -113,14 +124,13 @@ def checkout(request):
             amount=stripe_total,
             currency=settings.STRIPE_CURRENCY,
         )
-        print("view's intent", intent)
 
         if request.user.is_authenticated:
-            print("7")
             try:
                 profile = UserProfile.objects.get(user=request.user)
                 order_form = OrderForm(initial={
-                    'full_name': profile.user.get_full_name(),
+                    'first_name': profile.user.first_name,
+                    'last_name': profile.user.last_name,
                     'email': profile.user.email,
                     'phone_number': profile.default_phone_number,
                     'country': profile.default_country,
@@ -133,16 +143,12 @@ def checkout(request):
             except UserProfile.DoesNotExist:
                 order_form = OrderForm()
         else:
-            print("8")
             order_form = OrderForm()
 
     if not stripe_public_key:
-        print("9")
         messages.warning(request, 'Stripe public key is missing. \
             Did you forget to set it in your environment?')
 
-    print("Intent 2 type: ", type(intent))
-    print("Intent 2: ", intent)
     template = 'checkout/checkout.html'
     context = {
         'order_form': order_form,
@@ -169,6 +175,8 @@ def checkout_success(request, order_number):
         # Save the user's info
         if save_info:
             profile_data = {
+                'default_first_name': order.first_name,
+                'default_last_name': order.last_name,
                 'default_phone_number': order.phone_number,
                 'default_country': order.country,
                 'default_postcode': order.postcode,
