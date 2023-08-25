@@ -73,10 +73,23 @@ def all_products(request):
 def product_detail(request, product_id):
 
     product = get_object_or_404(Product, pk=product_id)
+    """
+    adfasdasdqaD
+    """
+    line_item_nr = None
+    if product.line_model is not None:
+        similar_products = Product.objects.filter(line_model=product.line_model).filter(~Q(id=product.id))
+        print(similar_products)
+        line_item_nr = product.line_model
+    """
+    ASdadaDa
+    """
     context = {
         'product': product,
+        'line_item_nr': line_item_nr,
+        'similar_products': similar_products,
     }
-  
+
     return render(request, 'products/product_detail.html', context)
 
 

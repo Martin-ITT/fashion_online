@@ -32,9 +32,14 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
     rating = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
     line_model = models.CharField(max_length=20, null=True, blank=True)
+    products_sold = models.IntegerField(default=0)
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
     is_active = models.BooleanField(null=False, blank=False, default=True)
 
     def __str__(self):
         return self.name
+    
+    def addQty(self, qty):
+        self.products_sold += qty
+        print("new quantity ", self.products_sold)
