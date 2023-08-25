@@ -69,7 +69,7 @@ class StripeWH_Handler:
         username = intent.metadata.username
         if username != 'AnonymousUser':
             profile = UserProfile.objects.get(user__username=username)
-            name = shipping_details.name.split("--")
+            name = shipping_details.name.split()
             if save_info:
                 profile.first_name = name[0]
                 profile.last_name = name[1]
@@ -86,10 +86,8 @@ class StripeWH_Handler:
         attempt = 1
         while attempt <= 5:
             try:
-                name = shipping_details.name.split("--")
                 order = Order.objects.get(
-                    first_name__iexact=name[0],
-                    last_name__iexact=name[1],
+                    full_name__iexact=shipping_details.name,
                     email__iexact=billing_details.email,
                     phone_number__iexact=shipping_details.phone,
                     country__iexact=shipping_details.address.country,
@@ -114,12 +112,11 @@ class StripeWH_Handler:
                 status=200)
         else:
             order = None
-            name = shipping_details.name.split("--")
             try:
-                name = shipping_details.name.split("--")
+                name = shipping_details.name.split()
                 order = Order.objects.create(
-                    first_name__iexact=name[0],
-                    last_name__iexact=name[1],
+                    first_name=name[0],
+                    last_name=name[1],
                     user_profile=profile,
                     email=billing_details.email,
                     phone_number=shipping_details.phone,
