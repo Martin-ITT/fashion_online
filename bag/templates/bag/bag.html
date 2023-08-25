@@ -25,8 +25,6 @@
     <div class="row">
         <div class="col">
             {% if bag_items %}
-
-
                 <div class="table-responsive rounded">
                     <table class="table table-sm table-borderless">
                         <thead class="text-black">
@@ -148,6 +146,27 @@
                         </tr>
                     </table>
                 </div>
+
+                <hr>
+                    <h4 class="mb-2 m-auto text-center">check out our best selling</h2>
+                <hr>
+                <div class="row">
+                {% for top in top_products %}
+                    <div class="col">
+                        <p class="mb-0 text-muted">{{ top.name | lower }}</p>
+                        {% if top.image %}
+                            <a href="{% url 'product_detail' top.id %}">
+                                <img class="card-img-top img-fluid" src="{{ top.image.url }}" alt="{{ top.name | lower }}">
+                            </a>
+                        {% else %}
+                            <a href="{% url 'product_detail' top.id %}">
+                                <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.jpg" alt="{{ top.name | lower }}">
+                            </a>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                </div>
+
 
 
             {% else %}

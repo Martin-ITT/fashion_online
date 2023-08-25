@@ -2,13 +2,20 @@ from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
 from django.urls import reverse
 from django.contrib import messages
 from products.models import Product
+from django.db.models import Count
 
 # Create your views here.
 
 # bag content page
 def view_bag(request):
-    
-    return render(request, 'bag/bag.html')
+
+    top_products = Product.objects.all().order_by('-products_sold')[:5]
+
+    context = {
+        'top_products': top_products,
+    }
+
+    return render(request, 'bag/bag.html', context)
 
 
 def add_to_bag(request, item_id):
