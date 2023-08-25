@@ -69,7 +69,10 @@ class StripeWH_Handler:
         username = intent.metadata.username
         if username != 'AnonymousUser':
             profile = UserProfile.objects.get(user__username=username)
-            name = shipping_details.name.split()
+            name = shipping_details.name.split("--")
+            print(name)
+            print("fname: ", name[0])
+            print("lname: ", name[1])
             if save_info:
                 profile.first_name = name[0]
                 profile.last_name = name[1]
@@ -87,7 +90,8 @@ class StripeWH_Handler:
         while attempt <= 5:
             try:
                 order = Order.objects.get(
-                    full_name__iexact=shipping_details.name,
+                    first_name__iexact=shipping_details.name,
+                    last_name__iexact=shipping_details.name,
                     email__iexact=billing_details.email,
                     phone_number__iexact=shipping_details.phone,
                     country__iexact=shipping_details.address.country,
@@ -101,6 +105,7 @@ class StripeWH_Handler:
                     stripe_pid=pid,
                 )
                 order_exists = True
+                print("order_exists = True, order found in DB")
                 break
             except Order.DoesNotExist:
                 attempt += 1
@@ -113,7 +118,10 @@ class StripeWH_Handler:
         else:
             order = None
             try:
-                name = shipping_details.name.split()
+                name = shipping_details.name.split("--")
+                print(name)
+                print("3-fname: ", name[0])
+                print("3-lname: ", name[1])
                 order = Order.objects.create(
                     first_name=name[0],
                     last_name=name[1],
@@ -154,6 +162,7 @@ class StripeWH_Handler:
                     content=f'Webhook received: {event["type"]} | ERROR: {e}',
                     status=500)
         self._send_confirmation_email(order)
+        print("order_exists = false, order created in WH")
         return HttpResponse(
             content=f'Webhook received: {event["type"]} | SUCCESS: Created order in webhook',
             status=200)
