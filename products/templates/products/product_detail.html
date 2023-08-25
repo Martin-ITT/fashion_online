@@ -122,14 +122,14 @@
                     </div>
                 </form>
             </div>
-            {% if line_item_nr %}
+            {% if similar_products %}
                 <hr>
                 <div class="row">
                 <p class="mb-2">you might also like</p>
                 {% for similar in similar_products %}
 
                 <div class="col-4">
-                <p class="mb-0">{{ similar.name | lower }}</p>
+                <p class="mb-0 text-muted">{{ similar.name | lower }}</p>
                 {% if product.image %}
                     <a href="{% url 'product_detail' similar.id %}">
                         <img class="card-img-top img-fluid" src="{{ similar.image.url }}" alt="{{ similar.name | lower }}">

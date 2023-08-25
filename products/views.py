@@ -65,7 +65,7 @@ def all_products(request):
         'current_sorting': current_sorting,
 
     }
-    
+
     return render(request, 'products/products.html', context)
 
 
@@ -73,20 +73,15 @@ def all_products(request):
 def product_detail(request, product_id):
 
     product = get_object_or_404(Product, pk=product_id)
-    """
-    adfasdasdqaD
-    """
-    line_item_nr = None
+    similar_products = None
+
+    # suggest similar products
     if product.line_model is not None:
-        similar_products = Product.objects.filter(line_model=product.line_model).filter(~Q(id=product.id))
+        similar_products = Product.objects.filter(line_model=product.line_model).filter(~Q(name=product.name))
         print(similar_products)
-        line_item_nr = product.line_model
-    """
-    ASdadaDa
-    """
+
     context = {
         'product': product,
-        'line_item_nr': line_item_nr,
         'similar_products': similar_products,
     }
 
