@@ -129,16 +129,16 @@
                 {% for similar in similar_products %}
 
                 <div class="col-4">
-                <p class="mb-0 text-muted">{{ similar.name | lower }}</p>
-                {% if product.image %}
+                    {% if product.image %}
                     <a href="{% url 'product_detail' similar.id %}">
                         <img class="card-img-top img-fluid" src="{{ similar.image.url }}" alt="{{ similar.name | lower }}">
                     </a>
-                {% else %}
+                    {% else %}
                     <a href="{% url 'product_detail' similar.id %}">
                         <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.jpg" alt="{{ similar.name | lower }}">
                     </a>
-                {% endif %}
+                    {% endif %}
+                    <p class="mb-0 text-muted">{{ similar.name | lower }}</p>
                 </div>
                 {% endfor %}
                 </div>

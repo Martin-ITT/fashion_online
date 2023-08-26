@@ -152,17 +152,17 @@
                 <hr>
                 <div class="row">
                 {% for top in top_products %}
-                    <div class="col">
-                        <p class="mb-0 text-muted">{{ top.name | lower }}</p>
+                    <div class="col-12">
                         {% if top.image %}
-                            <a href="{% url 'product_detail' top.id %}">
-                                <img class="card-img-top img-fluid" src="{{ top.image.url }}" alt="{{ top.name | lower }}">
-                            </a>
+                        <a href="{% url 'product_detail' top.id %}">
+                            <img class="card-img-top img-fluid" src="{{ top.image.url }}" alt="{{ top.name | lower }}">
+                        </a>
                         {% else %}
-                            <a href="{% url 'product_detail' top.id %}">
-                                <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.jpg" alt="{{ top.name | lower }}">
-                            </a>
+                        <a href="{% url 'product_detail' top.id %}">
+                            <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.jpg" alt="{{ top.name | lower }}">
+                        </a>
                         {% endif %}
+                        <p class="mb-0 text-muted">{{ top.name | lower }}</p>
                     </div>
                 {% endfor %}
                 </div>
