@@ -1,4 +1,4 @@
-dear {{ order.full_name }},
+dear {{ order.first_name }},
 
 This is a confirmation email from fashion OnLINE. Your order details are below:
 

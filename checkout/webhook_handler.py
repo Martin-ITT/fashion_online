@@ -70,9 +70,6 @@ class StripeWH_Handler:
         if username != 'AnonymousUser':
             profile = UserProfile.objects.get(user__username=username)
             name = shipping_details.name.split("--")
-            print(name)
-            print("fname: ", name[0])
-            print("lname: ", name[1])
             if save_info:
                 profile.first_name = name[0]
                 profile.last_name = name[1]
@@ -119,9 +116,6 @@ class StripeWH_Handler:
             order = None
             try:
                 name = shipping_details.name.split("--")
-                print(name)
-                print("3-fname: ", name[0])
-                print("3-lname: ", name[1])
                 order = Order.objects.create(
                     first_name=name[0],
                     last_name=name[1],
