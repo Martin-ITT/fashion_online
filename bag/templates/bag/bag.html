@@ -150,9 +150,9 @@
                 <hr>
                     <h4 class="mb-2 m-auto text-center">check out our best selling</h2>
                 <hr>
-                <div class="row">
+                <div class="row table">
                 {% for top in top_products %}
-                    <div class="col-12">
+                    <div class="col">
                         {% if top.image %}
                         <a href="{% url 'product_detail' top.id %}">
                             <img class="card-img-top img-fluid" src="{{ top.image.url }}" alt="{{ top.name | lower }}">
