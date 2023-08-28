@@ -9,7 +9,7 @@ from django.db.models import Count
 # bag content page
 def view_bag(request):
 
-    top_products = Product.objects.all().order_by('-products_sold')[:5]
+    top_products = Product.objects.all().order_by('-products_sold')[:6]
 
     context = {
         'top_products': top_products,

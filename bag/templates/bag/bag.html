@@ -146,29 +146,6 @@
                         </tr>
                     </table>
                 </div>
-
-                <hr>
-                    <h4 class="mb-2 m-auto text-center">check out our best selling</h2>
-                <hr>
-                <div class="row table">
-                {% for top in top_products %}
-                    <div class="col">
-                        {% if top.image %}
-                        <a href="{% url 'product_detail' top.id %}">
-                            <img class="card-img-top img-fluid" src="{{ top.image.url }}" alt="{{ top.name | lower }}">
-                        </a>
-                        {% else %}
-                        <a href="{% url 'product_detail' top.id %}">
-                            <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.jpg" alt="{{ top.name | lower }}">
-                        </a>
-                        {% endif %}
-                        <p class="mb-0 text-muted">{{ top.name | lower }}</p>
-                    </div>
-                {% endfor %}
-                </div>
-
-
-
             {% else %}
                 <p class="lead mb-5 text-center">hmm... weird. nothing is here. it looks like you need to add some products first.</p>
                 <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0 btn-lg">
@@ -178,6 +155,28 @@
                     <span class="text-uppercase text-danger">Back to menu</span>
                 </a>
             {% endif %}
+        </div>
+        <hr>
+        <h4 class="mb-2 m-auto text-center">check out our best sellers</h2>
+        <hr>
+        <div class="row table">
+        {% for top in top_products %}
+            <div class="col">
+                {% if top.image %}
+                <a href="{% url 'product_detail' top.id %}">
+                    <img class="card-img-top img-fluid" src="{{ top.image.url }}" alt="{{ top.name | lower }}">
+                </a>
+                {% else %}
+                <a href="{% url 'product_detail' top.id %}">
+                    <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.jpg" alt="{{ top.name | lower }}">
+                </a>
+                {% endif %}
+                <p class="mb-0 text-muted small">{{ top.name | lower }}</p>
+            </div>
+            {% if forloop.counter|divisibleby:3 %}
+                <hr class="col-12 d-sm-block d-lg-none mb-1">
+            {% endif %}
+        {% endfor %}
         </div>
     </div>
 </div>
